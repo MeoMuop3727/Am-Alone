@@ -21,7 +21,11 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(config["display"]["title"])
 
 # --- UI/Scence ---
-
+i = Input(
+    screen,
+    pos=(100,100),
+    border_width=5
+)
 
 while True:
     EVENTS = pygame.event.get()
@@ -29,6 +33,7 @@ while True:
     screen.fill(BACKGROUND_COLOR)
 
     # --- Rendering ---
+    i.update(EVENTS)
 
     for event in EVENTS:
         if event.type == pygame.QUIT:
