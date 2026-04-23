@@ -1,29 +1,40 @@
-import pygame, sys, traceback
+import pygame, sys, json
 from packages.components import *
 
+pygame.init()
+
+with open("packages/systems/screen_setting.json") as file:
+    config = json.load(file)
+
+# --- Functions Game ---
 def quit_game():
     pygame.quit()
     sys.exit()
 
-pygame.init()
+# --- Set up ---
+WIDTH, HEIGHT = config["window"]["width"], config["window"]["height"]
+FONT_FAMILY = config["display"]["font_family"]
+FPS = config["display"]["fps_limit"]
+BACKGROUND_COLOR = config["render"]["background_color"]
 
-screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption("main.py")
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption(config["display"]["title"])
 
-time = pygame.time.Clock()
-
+# --- UI/Scence ---
 
 
 while True:
-    screen.fill("#FFFFFF")
-    events = pygame.event.get()
-    time.tick(60)
+    EVENTS = pygame.event.get()
 
-    for event in events:
+    screen.fill(BACKGROUND_COLOR)
+
+    # --- Rendering ---
+
+    for event in EVENTS:
         if event.type == pygame.QUIT:
             quit_game()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w and (event.mod and pygame.KMOD_ALT):
+                quit_game()
     
-    
-
-    pygame.display.update()
-
+    pygame.display.flip()

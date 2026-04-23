@@ -12,32 +12,78 @@ class ButtonStates(Enum):
 class ButtonText:
 
     """
-        A reusable, styled button component for pygame UI.
- 
-        Supports hover, press, disabled states, and a callback fired on click release.
+        Button component for interactive UI in Pygame.
 
-        Args:
-            surface:    Screen to draw the button
-            pos:        (x,y) position (top-left)
-            size:       (width, height) in pixels
-            content:    Text display on the button (None = "")
-            font:       Font family (None = font default of pygame)
-            text_color: Color of text on the button (Normal)
-            text_color_hover:   Color of text on the button when hover
-            text_color_pressed: Color of text on the button when pressed
-            text_color_disabled:    Color of text on the button when disabled
-            color_normal:   Background color (R, B, G)
-            color_hover:    Background color on hover
-            color_pressed:  Background color on pressed
-            color_disable:  Background color on disable
-            on_click:   Callback function called when the button is clicked
-            border_width:   Outline thickness (0 = no border)
-            border_radius:  Corner rounding in pixels
-            border_color:   Outline color
-            border_color_hover: Outline color hover
-            border_color_pressed: Outline color pressed
-            border_color_disabled: Outlinr color disabled
-            sound_click:    The sound when the button is clicked
+        This Button supports multiple visual states (normal, hover, pressed, disabled),
+        custom colors, optional sound feedback, and click callbacks.
+
+        Parameters
+        ----------
+        surface : pygame.Surface
+            Target surface where the Button will be rendered.
+
+        pos : Tuple[int, int]
+            Top-left position (x, y) of the Button.
+
+        size : Tuple[int, int]
+            Dimensions (width, height) of the Button.
+
+        content : Optional[str]
+            Text displayed on the Button.
+
+        font : pygame.font.Font
+            Font used to render the button text.
+
+        text_color : Tuple[int, int, int] | str
+            Text color in normal state.
+
+        text_color_hover : Tuple[int, int, int] | str
+            Text color when the mouse is hovering over the button.
+
+        text_color_pressed : Tuple[int, int, int] | str
+            Text color when the button is being pressed.
+
+        text_color_disabled : Tuple[int, int, int] | str
+            Text color when the button is disabled.
+
+        color_normal : Tuple[int, int, int] | str
+            Background color in normal state.
+
+        color_hover : Tuple[int, int, int] | str
+            Background color when hovered.
+
+        color_pressed : Tuple[int, int, int] | str
+            Background color when pressed.
+
+        color_disabled : Tuple[int, int, int] | str
+            Background color when disabled.
+
+        on_click : Optional[Callable[[], None]]
+            Callback function executed when the button is clicked.
+
+        border_width : int
+            Width of the button border. Set to 0 for no border.
+
+        border_radius : int
+            Radius for rounded corners.
+
+        border_color : Tuple[int, int, int] | str
+            Border color in normal state.
+
+        border_color_hover : Tuple[int, int, int] | str
+            Border color when hovered.
+
+        border_color_pressed : Tuple[int, int, int] | str
+            Border color when pressed.
+
+        border_color_disabled : Tuple[int, int, int] | str
+            Border color when disabled.
+
+        sound_click : Optional[pygame.mixer.Sound]
+            Sound played when the button is clicked.
+
+        disabled : bool
+            If True, the button is inactive and ignores user input.
     """
     
     def __init__(self,
@@ -64,11 +110,13 @@ class ButtonText:
                  sound_click: Optional[pygame.mixer.Sound] = None,
                  disabled: bool = False) -> None:
         self._surface = surface
+        self._rect = pygame.Rect(pos, size)
+        
         self._pos = pos
         self._size = size
 
-        self._content = content or ""
-        self._font = font or pygame.font.SysFont("serif", 20)
+        self._content = "" if content is None else content
+        self._font = font if font is not None else pygame.font.SysFont(None, 20)
         self._text_color = text_color
         self._text_color_hover = text_color_hover
         self._text_color_pressed = text_color_pressed
@@ -154,7 +202,7 @@ class ButtonText:
         pygame.draw.rect(self._surface, color, button, border_radius=self._border_radius)
 
     def _draw_content(self, color: Tuple[int,int,int] | str) -> None:
-        rect = pygame.Rect(self._pos, self._size)
+        rect = self._rect
 
         text_surface = self._font.render(self._content, True, color)
         text_rect = text_surface.get_rect(center=rect.center)

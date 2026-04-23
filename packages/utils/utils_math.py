@@ -1,3 +1,6 @@
+INT_MAX = 2 ** 31 - 1
+INT_MIN = -INT_MAX
+
 def minus_tuple(__v1: tuple[int | float], __v2: tuple[int | float]) -> tuple:
     result_minused = []
 
