@@ -177,9 +177,10 @@ class ButtonText:
             else:
                 if self._pressed and self._hovered:
                     try:
-                        if self._on_click: self._on_click()
-                        if self._sound_click(): self._sound_click.play()
-                    except TypeError: pass
+                        if self._on_click is not None: self._on_click()
+                        if self._sound_click is not None: self._sound_click.play()
+                    except TypeError as e: 
+                        print(e)
                 self._pressed = False             
 
             visual_state = self._get_visual_state()       
