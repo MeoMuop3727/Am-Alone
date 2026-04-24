@@ -21,11 +21,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(config["display"]["title"])
 
 # --- UI/Scence ---
-i = Input(
-    screen,
-    pos=(100,100),
-    border_width=5
-)
+
 
 while True:
     EVENTS = pygame.event.get()
@@ -33,13 +29,12 @@ while True:
     screen.fill(BACKGROUND_COLOR)
 
     # --- Rendering ---
-    i.update(EVENTS)
 
     for event in EVENTS:
         if event.type == pygame.QUIT:
             quit_game()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w and (event.mod and pygame.KMOD_ALT):
-                quit_game()
-    
+        # elif event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_w and (event.mod and pygame.KMOD_ALT):
+        #         quit_game()
+            
     pygame.display.flip()
