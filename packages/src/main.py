@@ -21,16 +21,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(config["display"]["title"])
 
 # --- UI/Scence ---
-t = Tabs(
-    screen,
-    pos=(100,100),
-    border_width=0,
-    tabs_panel=["tab1", "tab2", "tab3"],
-    tabs_content=[
-        lambda: print("Tab 1")
-    ],
-    font=pygame.font.Font(None, 30)
-)
+
 
 while True:
     EVENTS = pygame.event.get()
@@ -38,7 +29,7 @@ while True:
     screen.fill(BACKGROUND_COLOR)
 
     # --- Rendering ---
-    t.update()
+
 
     for event in EVENTS:
         if event.type == pygame.QUIT:
