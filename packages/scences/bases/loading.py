@@ -2,6 +2,41 @@ import pygame
 from typing import Optional, Tuple
 
 class LoadingScence:
+
+    """
+        Initialize a loading scene component used for displaying animated loading text.
+
+        Args:
+            surface (pygame.Surface):
+                The main surface where the loading scene will be rendered.
+
+            background_color (Tuple[int, int, int] | str, optional):
+                Background color of the loading scene. Can be an RGB tuple
+                or a hex string (e.g., "#000000"). Defaults to black.
+
+            size (Tuple[int, int], optional):
+                Size (width, height) of the loading area. If (0, 0),
+                it should typically fallback to the surface size.
+
+            pos (Tuple[int, int], optional):
+                Top-left position of the loading scene relative to the surface.
+
+            font (Optional[pygame.font.Font], optional):
+                Font used to render the loading text. If None, a default font
+                should be assigned internally.
+
+            time_interval (float, optional):
+                Time interval (in seconds) between animation updates
+                (e.g., blinking dots "..."). Defaults to 0.5.
+
+            text_color (Tuple[int, int, int] | str, optional):
+                Color of the loading text. Accepts RGB tuple or hex string.
+                Defaults to white.
+
+            padding (int, optional):
+                Inner padding applied when positioning text inside the scene.
+    """
+
     def __init__(self,
                  surface: pygame.Surface,
                  background_color: Tuple[int,int,int] | str = "#000000",
