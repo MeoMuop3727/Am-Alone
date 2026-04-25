@@ -1,5 +1,6 @@
 import pygame, sys, json
 from packages.components import *
+from packages.scences import *
 
 pygame.init()
 
