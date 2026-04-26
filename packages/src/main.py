@@ -1,5 +1,7 @@
 import pygame, sys, json
 from packages.components import *
+from packages.scences import *
+from packages.systems.draw_system import DrawSystem
 
 pygame.init()
 
