@@ -3,6 +3,7 @@ from packages.components import *
 from packages.scences import *
 from packages.systems.draw_system import DrawSystem
 
+
 pygame.init()
 
 with open("packages/systems/screen_setting.json") as file:
