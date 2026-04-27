@@ -1,0 +1,37 @@
+{
+    "window": {
+        "width": 1920,
+        "height": 820,
+        "min_width": 800,
+        "min_height": 600,
+        "resizable": false,
+        "fullscreen": false,
+        "borderless": false
+    },
+
+    "display": {
+        "title": "Tap-tap and bap-bap",
+        "icon": "",
+        "vsync": true,
+        "fps_limit": 60,
+        "font_family": ""
+    },
+
+    "render": {
+        "background_color": "#FFFFFF",
+        "double_buffer": true,
+        "hardware_accelerated": true
+    },
+
+    "scaling": {
+        "enable": true,
+        "logical_width": 1280,
+        "logical_height": 720,
+        "keep_aspect_ratio": true
+    },
+
+    "debug": {
+        "show_fps": false,
+        "show_resolution": false
+    }
+}
