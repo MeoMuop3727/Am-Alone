@@ -1,7 +1,7 @@
 {
     "window": {
-        "width": 1280,
-        "height": 720,
+        "width": 1920,
+        "height": 820,
         "min_width": 800,
         "min_height": 600,
         "resizable": false,
@@ -10,7 +10,7 @@
     },
 
     "display": {
-        "title": "My Game",
+        "title": "Tap-tap and bap-bap",
         "icon": "",
         "vsync": true,
         "fps_limit": 60,

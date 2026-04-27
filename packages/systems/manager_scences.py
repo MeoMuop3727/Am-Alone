@@ -7,8 +7,6 @@ def exit_game() -> None:
 class Scene:
     def __init__(self):
         self.manager = None
-        self.next_scene = None
-        self.prev_scene = None
 
     # --- Public API ---
     def handle_events(self, events):

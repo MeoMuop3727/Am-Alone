@@ -29,8 +29,9 @@ class MainMenu(Scene):
 
     def handle_events(self, events):
         for event in events:
-            if event.type == pygame.KEYDOWN and not event.repeat:
-                pass
+            if event.type == pygame.KEYDOWN:
+                from packages.scences.game.play import PlayGame
+                self.manager.replace_scence(PlayGame(self._surface))
 
     def update(self, dt):
         self._time += dt * 0.75

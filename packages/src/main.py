@@ -1,44 +1,28 @@
-import pygame, sys, json
-from packages.components import *
-from packages.scences import *
-from packages.systems.draw_system import DrawSystem
-
-
-pygame.init()
+import json
 
 with open("packages/systems/screen_setting.json") as file:
     config = json.load(file)
 
-# --- Functions Game ---
-def quit_game():
-    pygame.quit()
-    sys.exit()
-
-# --- Set up ---
 WIDTH, HEIGHT = config["window"]["width"], config["window"]["height"]
-FONT_FAMILY = config["display"]["font_family"]
-FPS = config["display"]["fps_limit"]
-BACKGROUND_COLOR = config["render"]["background_color"]
+CAPTION = config["display"]["title"]
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption(config["display"]["title"])
+import os
+os.environ["SDL_AUDIODRIVER"] = "pulseaudio"
 
-# --- UI/Scence ---
+import pygame
+from packages.systems.manager_scences import ScenceManager
+from packages.scences.base.main_menu import MainMenu
+from packages.scences.game import *
 
+pygame.mixer.pre_init(44100, -16, 2, 512)
+pygame.init()
+pygame.mixer.init()
 
-while True:
-    EVENTS = pygame.event.get()
+screen = pygame.display.set_mode((1280,720))
 
-    screen.fill(BACKGROUND_COLOR)
+manager = ScenceManager(screen)
 
-    # --- Rendering ---
+manager.push_scence(MainMenu(screen))
 
+manager.run()
 
-    for event in EVENTS:
-        if event.type == pygame.QUIT:
-            quit_game()
-        # elif event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_w and (event.mod and pygame.KMOD_ALT):
-        #         quit_game()
-            
-    pygame.display.flip()

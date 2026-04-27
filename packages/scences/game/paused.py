@@ -3,6 +3,8 @@ from packages.systems.manager_scences import Scene
 from typing import Optional
 from packages.components import *
 
+from packages.scences.base.main_menu import MainMenu
+
 class PauseGame(Scene):
     def __init__(self, 
                  score: int,
@@ -22,14 +24,14 @@ class PauseGame(Scene):
         self._draw_button()
 
     def _draw_button(self) -> None:
-        buttons = ["CONTINUE", "QUIT"]
+        buttons = ["CONTINUE", "MAIN MENU"]
 
         funcs = [
             lambda: self.manager.pop_scence(),
-            None
+            lambda: self.manager.replace_scence(MainMenu(self._surface))
         ]
 
-        SIZE_BUTTON = (250, 80)
+        SIZE_BUTTON = (280, 80)
 
         for i, button_label in enumerate(buttons):
             button = ButtonText(
